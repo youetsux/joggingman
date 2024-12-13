@@ -7,7 +7,7 @@
 
 
 Player::Player(GameObject* parent)
-	:GameObject(parent), hSilly(-1), swordDir({ 0, 1, 0 })
+	:GameObject(parent), hSilly(-1),hJogging(-1)
 {
 	//swordDirには、初期方向として、ローカルモデルの剣の根っこから
 	//先端までのベクトルとして（0,1,0)を代入しておく
@@ -16,15 +16,15 @@ Player::Player(GameObject* parent)
 
 void Player::Initialize()
 {
+	hSilly = Model::Load("idle.fbx");
 	hSilly = Model::Load("jogging.fbx");
-	//hSilly = Model::Load("oji.fbx");
-	Model::SetAnimFrame(hSilly, 0, 165, 1.0);
-	//pWep = Instantiate<Weapon>(GetParent());
-	//pWep->SetPosition({ 0, 0, 0 });
-	jb[0] = Instantiate<JointBall>(GetParent());
-	jb[0]->SetPosition({ -2, 0, 0 });
-	jb[1] = Instantiate<JointBall>(GetParent());
-	jb[1]->SetPosition({ 2, 2, 0 });
+	jogTr.scale_ = { 0.02,0.02,0.02 };
+	jogTr.position_ = { 0, -2.0, 0 };
+
+	//walk 165
+	Model::SetAnimFrame(hSilly, 0, 156, 1.0);
+
+
 
 	//XMVECTOR v1{ 0, 1, 0 };
 	//XMVECTOR v2{ 1, 1, 0 };
@@ -45,11 +45,10 @@ void Player::Initialize()
 
 void Player::Update()
 {
-	transform_.rotate_.y +=1;
+	//transform_.rotate_.y +=1;
 	
 	//pWep->SetPosition(Model::GetAnimBonePosition(hSilly, "mixamorig6:RightHand"));
 	//Transform tr1, tr2;
-
 	//tr1.position_ = Model::GetAnimBonePosition(hSilly, "mixamorig:LeftHandThumb3");
 	//tr2.position_ = Model::GetAnimBonePosition(hSilly, "mixamorig:RightHandPinky3");
 	//XMVECTOR Vt1, Vt2, localUp{ 0,1,0 }, SwordDir;
@@ -90,9 +89,8 @@ void Player::Update()
 
 void Player::Draw()
 {
-	transform_.scale_ = { 0.05,0.05,0.05 };
-	transform_.position_ = { 0, -2.0, 0 };
-	Model::SetTransform(hSilly, transform_);
+
+	Model::SetTransform(hSilly, jogTr);
 	Model::Draw(hSilly);
 }
 

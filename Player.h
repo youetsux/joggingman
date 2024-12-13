@@ -7,9 +7,8 @@ class Player :
     public GameObject
 {
 	int hSilly;
-	Weapon* pWep;
-	XMVECTOR swordDir;
-	JointBall *jb[2];
+	int hJogging;
+	Transform idleTr, jogTr;
 public:
 	//コンストラクタ
 	//引数：parent  親オブジェクト（SceneManager）
