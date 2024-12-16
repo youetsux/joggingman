@@ -21,11 +21,10 @@ void Player::Initialize()
 	hJogging = Model::Load("jogging.fbx");
 	transform_.scale_ = { 0.02,0.02,0.02 };
 	transform_.position_ = { 0, 0.0, 0 };
-	front = { 0, 0, -1, 0 };
+	//front = { 0, 0, -1, 0 };
 	pState = IDLE;
 	
-	Camera::SetPosition({ 0, 2, 3 });
-	Camera::SetTarget({ 0,2,0 });
+
 
 	//walk 165
 	Model::SetAnimFrame(hSilly, 0, 156, 1.0);
@@ -69,14 +68,7 @@ void Player::Update()
 		}
 	}
 
-	if (Input::IsKey(DIK_LEFT))
-	{
-		transform_.rotate_.y -= 1;
-	}
-	if (Input::IsKey(DIK_RIGHT))
-	{
-		transform_.rotate_.y += 1;
-	}
+
 
 
 	

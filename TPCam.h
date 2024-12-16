@@ -1,15 +1,14 @@
 #pragma once
 #include "Engine/GameObject.h"
-#include "Engine/Model.h"
-
-
-//テストシーンを管理するクラス
-class TestScene : public GameObject
+class TPCam :
+    public GameObject
 {
+	XMFLOAT3 position;
+	XMFLOAT3 target;
 public:
 	//コンストラクタ
 	//引数：parent  親オブジェクト（SceneManager）
-	TestScene(GameObject* parent);
+	TPCam(GameObject* parent);
 
 	//初期化
 	void Initialize() override;
@@ -22,5 +21,5 @@ public:
 
 	//開放
 	void Release() override;
-
 };
+
