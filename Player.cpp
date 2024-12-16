@@ -6,7 +6,7 @@
 #include "Engine/Camera.h"
 
 Player::Player(GameObject* parent)
-	:GameObject(parent), hSilly(-1), hJogging(-1),
+	:GameObject(parent,"Player"), hSilly(-1), hJogging(-1),
 	front({ 0, 0,-1, 0 }), pState(IDLE)
 {
 	//swordDirには、初期方向として、ローカルモデルの剣の根っこから
@@ -19,8 +19,8 @@ void Player::Initialize()
 
 	hSilly = Model::Load("idle.fbx");
 	hJogging = Model::Load("jogging.fbx");
-	transform_.scale_ = { 0.02,0.02,0.02 };
-	transform_.position_ = { 0, 0.0, 0 };
+	transform_.scale_ = { 0.001,0.001,0.001 };
+	transform_.position_ = { 0.0, 0.0, 0.0 };
 	//front = { 0, 0, -1, 0 };
 	pState = IDLE;
 	
@@ -129,4 +129,14 @@ void Player::Draw()
 
 void Player::Release()
 {
+}
+
+XMFLOAT3 Player::GetHeadPos()
+{
+	XMFLOAT3 res = { 0,0,0 };
+	if(pState == IDLE)
+		res = Model::GetAnimBonePosition(hSilly, "mixamorig1:Head");
+	else if(pState == JOGGING)
+		res = Model::GetAnimBonePosition(hJogging, "mixamorig1:Head");
+	return res;
 }

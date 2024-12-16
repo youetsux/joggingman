@@ -1,7 +1,7 @@
 #include "TPCam.h"
 #include "DummyController.h"
 #include "Engine/Camera.h"
-
+#include "Player.h"
 
 TPCam::TPCam(GameObject* parent)
 	:GameObject(parent, "TPCam")
@@ -19,23 +19,22 @@ void TPCam::Initialize()
 void TPCam::Update()
 {
 	XMMATRIX wMat = GetParent()->GetWorldMatrix();
-	XMFLOAT3 wpos = { transform_.position_.x + GetParent()->GetPosition().x,
-					  transform_.position_.y + GetParent()->GetPosition().y,
-					  transform_.position_.z + GetParent()->GetPosition().z };
-	XMFLOAT3 wrot = { transform_.rotate_.x + GetParent()->GetRotate().x,
-					  transform_.rotate_.y + GetParent()->GetRotate().y,
-					  transform_.rotate_.z + GetParent()->GetRotate().z };
 
-	XMFLOAT3 wscl = { transform_.scale_.x + GetParent()->GetScale().x,
-				      transform_.scale_.y + GetParent()->GetScale().y,
-				      transform_.scale_.z + GetParent()->GetScale().z };
+	XMFLOAT3 lpos = { 0.0f, 0.2f, 0.3f };//カメラのローカルポジション
+	XMFLOAT3 ppos = GetParent()->GetWorldPosition();
+	XMFLOAT3 wpos = { lpos.x ,  lpos.y , lpos.z  };
+					  
 	XMVECTOR wposV = XMLoadFloat3(&wpos);
-	wposV = XMVector3TransformCoord(wposV, wMat);
+	wposV = XMVector3Transform(wposV, wMat);
 	XMFLOAT3 campos;
+
 	XMStoreFloat3(&campos, wposV);
 	XMFLOAT3 tpos = GetParent()->GetPosition();
-	Camera::SetPosition(campos);
-	Camera::SetTarget(tpos);
+	
+	Player* pl = (Player*)FindObject("Player");
+	
+	Camera::SetPosition({ campos.x, campos.y, campos.z });
+	Camera::SetTarget(pl->GetHeadPos());
 }
 
 void TPCam::Draw()

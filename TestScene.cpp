@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "DummyController.h"
 #include "TPCam.h"
+#include "Ground.h"
 
 //コンストラクタ
 TestScene::TestScene(GameObject * parent)
@@ -13,7 +14,7 @@ TestScene::TestScene(GameObject * parent)
 void TestScene::Initialize()
 {	
 	//pWp = Instantiate<Weapon>(this);
-
+	Instantiate<Ground>(this);
 	Instantiate <Player>(Instantiate<DummyController>(this));
 	Instantiate <TPCam>(Instantiate<DummyController>(this));
 

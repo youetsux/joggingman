@@ -99,6 +99,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="DummyController.cpp" />
     <ClCompile Include="TPCam.cpp" />
+    <ClCompile Include="Ground.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BoxCollider.h">
@@ -174,6 +175,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="DummyController.h" />
     <ClInclude Include="TPCam.h" />
+    <ClInclude Include="Ground.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shader\Simple2D.hlsl">
