@@ -8,17 +8,18 @@ DummyController::DummyController(GameObject* parent)
 
 void DummyController::Initialize()
 {
+	transform_.position_ = { 2, 0, 0 };
 }
 
 void DummyController::Update()
 {
 	if (Input::IsKey(DIK_LEFT))
 	{
-		transform_.rotate_.y -= 5;
+		transform_.rotate_.y -= 2;
 	}
 	if (Input::IsKey(DIK_RIGHT))
 	{
-		transform_.rotate_.y += 5;
+		transform_.rotate_.y += 2;
 	}
 
 	if (Input::IsKey(DIK_SPACE))
@@ -29,7 +30,7 @@ void DummyController::Update()
 		front = XMVector3Transform(front, mvec);
 		XMVECTOR npos;
 		npos = XMLoadFloat3(&transform_.position_); 
-		npos = npos + 0.004 * front;
+		npos = npos + 0.007 * front;
 		XMStoreFloat3(&transform_.position_, npos);
 	}
 }

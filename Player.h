@@ -1,6 +1,5 @@
 #pragma once
 #include "Engine/GameObject.h"
-#include "Weapon.h"
 
 
 class Player :
@@ -13,7 +12,6 @@ class Player :
 	};
 	int hSilly;
 	int hJogging;
-	Transform idleTr, jogTr;
 	XMVECTOR front;
 	PLAYER_STATE pState;
 public:
