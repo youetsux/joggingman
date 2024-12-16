@@ -1,13 +1,13 @@
 #include "Player.h"
 #include "Engine/Model.h"
 #include "Engine/Debug.h"
-#include "Weapon.h"
+#include "Engine/Input.h"
 #include "TestScene.h"
-#include "JointBall.h"
-
+#include "Engine/Camera.h"
 
 Player::Player(GameObject* parent)
-	:GameObject(parent), hSilly(-1),hJogging(-1)
+	:GameObject(parent), hSilly(-1), hJogging(-1),
+	front({ 0, 0,-1, 0 }), pState(IDLE)
 {
 	//swordDirには、初期方向として、ローカルモデルの剣の根っこから
 	//先端までのベクトルとして（0,1,0)を代入しておく
@@ -16,14 +16,19 @@ Player::Player(GameObject* parent)
 
 void Player::Initialize()
 {
+
 	hSilly = Model::Load("idle.fbx");
-	hSilly = Model::Load("jogging.fbx");
-	jogTr.scale_ = { 0.02,0.02,0.02 };
-	jogTr.position_ = { 0, -2.0, 0 };
+	hJogging = Model::Load("jogging.fbx");
+	transform_.scale_ = { 0.02,0.02,0.02 };
+	transform_.position_ = { 0, 0.0, 0 };
+	front = { 0, 0, -1, 0 };
+	pState = IDLE;
+	
+	Camera::SetPosition({ 0, 2, 3 });
+	Camera::SetTarget({ 0,2,0 });
 
 	//walk 165
 	Model::SetAnimFrame(hSilly, 0, 156, 1.0);
-
 
 
 	//XMVECTOR v1{ 0, 1, 0 };
@@ -47,6 +52,35 @@ void Player::Update()
 {
 	//transform_.rotate_.y +=1;
 	
+	if (Input::IsKey(DIK_SPACE))
+	{
+		if (pState == IDLE)
+		{
+			pState = JOGGING;
+			Model::SetAnimFrame(hSilly, 0, 156, 1.0);
+		}
+	}
+	if (Input::IsKeyUp(DIK_SPACE))
+	{
+		if (pState == JOGGING)
+		{
+			pState = IDLE;
+			Model::SetAnimFrame(hJogging, 0, 165, 1.0);
+		}
+	}
+
+	if (Input::IsKey(DIK_LEFT))
+	{
+		transform_.rotate_.y -= 1;
+	}
+	if (Input::IsKey(DIK_RIGHT))
+	{
+		transform_.rotate_.y += 1;
+	}
+
+
+	
+
 	//pWep->SetPosition(Model::GetAnimBonePosition(hSilly, "mixamorig6:RightHand"));
 	//Transform tr1, tr2;
 	//tr1.position_ = Model::GetAnimBonePosition(hSilly, "mixamorig:LeftHandThumb3");
@@ -89,9 +123,15 @@ void Player::Update()
 
 void Player::Draw()
 {
-
-	Model::SetTransform(hSilly, jogTr);
-	Model::Draw(hSilly);
+	if (pState == IDLE) {
+		Model::SetTransform(hSilly, transform_);
+		Model::Draw(hSilly);
+	}
+	else if(pState == JOGGING)
+	{
+		Model::SetTransform(hJogging, transform_);
+		Model::Draw(hJogging);
+	}
 }
 
 

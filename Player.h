@@ -2,13 +2,20 @@
 #include "Engine/GameObject.h"
 #include "Weapon.h"
 
-class JointBall;
+
 class Player :
     public GameObject
 {
+
+	enum PLAYER_STATE
+	{
+		IDLE, JOGGING, MAXSTATE
+	};
 	int hSilly;
 	int hJogging;
 	Transform idleTr, jogTr;
+	XMVECTOR front;
+	PLAYER_STATE pState;
 public:
 	//コンストラクタ
 	//引数：parent  親オブジェクト（SceneManager）
