@@ -8,10 +8,11 @@ class Player :
 
 	enum PLAYER_STATE
 	{
-		IDLE, JOGGING, MAXSTATE
+		IDLE, JOGGING, LPUNCH, RPUNCH, MAXSTATE
 	};
 	int hSilly;
 	int hJogging;
+	int hLPunch, hRPunch;
 	XMVECTOR front;
 	PLAYER_STATE pState;
 public:
@@ -31,5 +32,6 @@ public:
 	//ŠJ•ú
 	void Release() override;
 	XMFLOAT3 GetHeadPos();
+
 };
 

@@ -14,15 +14,15 @@
     <Filter Include="01Engine\DirectX">
       <UniqueIdentifier>{e56f8c9a-95a5-4ceb-b65f-5b8e572d087b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01Engine\GameObject">
-      <UniqueIdentifier>{b450e438-c939-4b05-b319-0e3c0b4a335c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="01Engine\ResourceManager">
       <UniqueIdentifier>{bedee914-5063-4c08-95bb-79c861b4969c}</UniqueIdentifier>
     </Filter>
     <Filter Include="02Shader">
       <UniqueIdentifier>{47a6a3f5-8cfd-436b-8d58-beccd108f3f3}</UniqueIdentifier>
       <Extensions>hlsl</Extensions>
+    </Filter>
+    <Filter Include="01Engine\ResourceManager\GameObject">
+      <UniqueIdentifier>{b450e438-c939-4b05-b319-0e3c0b4a335c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -51,13 +51,13 @@
       <Filter>01Engine\DirectX</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Camera.cpp">
-      <Filter>01Engine\GameObject</Filter>
+      <Filter>01Engine\ResourceManager\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="Engine\GameObject.cpp">
-      <Filter>01Engine\GameObject</Filter>
+      <Filter>01Engine\ResourceManager\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="Engine\RootObject.cpp">
-      <Filter>01Engine\GameObject</Filter>
+      <Filter>01Engine\ResourceManager\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="Engine\CsvReader.cpp">
       <Filter>01Engine\ResourceManager</Filter>
@@ -78,7 +78,7 @@
       <Filter>01Engine\DirectX</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Transform.cpp">
-      <Filter>01Engine\GameObject</Filter>
+      <Filter>01Engine\ResourceManager\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="TestScene.cpp" />
     <ClCompile Include="Engine\Audio.cpp">
@@ -127,13 +127,13 @@
       <Filter>01Engine\DirectX</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Camera.h">
-      <Filter>01Engine\GameObject</Filter>
+      <Filter>01Engine\ResourceManager\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="Engine\GameObject.h">
-      <Filter>01Engine\GameObject</Filter>
+      <Filter>01Engine\ResourceManager\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="Engine\RootObject.h">
-      <Filter>01Engine\GameObject</Filter>
+      <Filter>01Engine\ResourceManager\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="Engine\CsvReader.h">
       <Filter>01Engine\ResourceManager</Filter>
@@ -154,7 +154,7 @@
       <Filter>01Engine\DirectX</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Transform.h">
-      <Filter>01Engine\GameObject</Filter>
+      <Filter>01Engine\ResourceManager\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="TestScene.h" />
     <ClInclude Include="Engine\Audio.h">

@@ -1,5 +1,6 @@
 #include "DummyController.h"
 #include "Engine/Input.h"
+#include "Player.h"
 
 DummyController::DummyController(GameObject* parent)
 	:GameObject(parent,"DummyController")

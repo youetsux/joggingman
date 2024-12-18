@@ -59,7 +59,7 @@ namespace VFX
 	//エミッター（パーティクルの噴射口）
 	struct Emitter
 	{
-		EmitterData data ;		//作成時に指定されたデータ
+		EmitterData data;		//作成時に指定されたデータ
 		int handle = -1;		//ハンドル（番号）
 		DWORD frameCount = 0;	//開始してからのフレーム数
 		BillBoard* pBillBoard = nullptr;	//パーティクルに使うポリゴン
@@ -88,7 +88,7 @@ namespace VFX
 		Emitter* pEmitter;	//発生元エミッタ
 	};
 
-	
+
 
 
 

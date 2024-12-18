@@ -6,7 +6,7 @@
 TPCam::TPCam(GameObject* parent)
 	:GameObject(parent, "TPCam")
 {
-	transform_.position_ = { 0,3,4 };
+	transform_.position_ = { 0, 3, 10 };
 	target = { 0,2,0 };
 }
 
@@ -20,7 +20,7 @@ void TPCam::Update()
 {
 	XMMATRIX wMat = GetParent()->GetWorldMatrix();
 
-	XMFLOAT3 lpos = { 0.0f, 0.2f, 0.3f };//カメラのローカルポジション
+	XMFLOAT3 lpos = { 0.0f, 0.2f, 0.8f };//カメラのローカルポジション
 	XMFLOAT3 ppos = GetParent()->GetWorldPosition();
 	XMFLOAT3 wpos = { lpos.x ,  lpos.y , lpos.z  };
 					  
