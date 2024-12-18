@@ -8,13 +8,15 @@ class Player :
 
 	enum PLAYER_STATE
 	{
-		IDLE, JOGGING, LPUNCH, RPUNCH, MAXSTATE
+		IDLE, JOGGING, PUNCH, JUMP, MAXSTATE
 	};
 	int hSilly;
 	int hJogging;
 	int hLPunch, hRPunch;
+	int hJump;
 	XMVECTOR front;
 	PLAYER_STATE pState;
+	bool isRightP;
 public:
 	//コンストラクタ
 	//引数：parent  親オブジェクト（SceneManager）

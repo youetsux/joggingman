@@ -9,7 +9,7 @@ DummyController::DummyController(GameObject* parent)
 
 void DummyController::Initialize()
 {
-	transform_.position_ = { 2, 0, 0 };
+	transform_.position_ = { 0, 0, 0 };
 }
 
 void DummyController::Update()
@@ -25,7 +25,7 @@ void DummyController::Update()
 
 	if (Input::IsKey(DIK_SPACE))
 	{
-		transform_.Calclation();
+		//transform_.Calclation();
 		XMMATRIX mvec = transform_.matRotate_;
 		XMVECTOR front{ 0, 0, -1, 0 };
 		front = XMVector3Transform(front, mvec);

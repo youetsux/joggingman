@@ -506,6 +506,69 @@ void FbxParts::InitSkelton(FbxMesh* pMesh)
 	//	SAFE_DELETE_ARRAY(polyTable[i].vertexIndex);
 	//}
 	//SAFE_DELETE_ARRAY(polyTable);
+	{
+		//////////////////////////
+			// ボーンごとの現在の行列を取得する
+		for (int i = 0; i < numBone_; i++)
+		{
+			FbxAnimEvaluator* evaluator = ppCluster_[i]->GetLink()->GetScene()->GetAnimationEvaluator();
+			FbxMatrix mCurrentOrentation = evaluator->GetNodeGlobalTransform(ppCluster_[i]->GetLink(), 0);
+
+			// 行列コピー（Fbx形式からDirectXへの変換）
+			XMFLOAT4X4 pose;
+			for (DWORD x = 0; x < 4; x++)
+			{
+				for (DWORD y = 0; y < 4; y++)
+				{
+					pose(x, y) = (float)mCurrentOrentation.Get(x, y);
+				}
+			}
+
+			XMFLOAT4X4 mmat;
+			XMMATRIX mMirror;
+			mMirror = XMMatrixIdentity();
+			XMStoreFloat4x4(&mmat, mMirror);
+			mmat.m[2][2] = -1.0f;
+			mMirror = XMLoadFloat4x4(&mmat);
+
+			// オフセット時のポーズの差分を計算する
+			pBoneArray_[i].newPose = XMLoadFloat4x4(&pose) * mMirror;
+			pBoneArray_[i].diffPose = XMMatrixInverse(nullptr, pBoneArray_[i].bindPose * mMirror);
+			pBoneArray_[i].diffPose = pBoneArray_[i].diffPose * pBoneArray_[i].newPose;
+
+			//反転無し
+			//pBoneArray_[i].newPose = XMLoadFloat4x4(&pose);
+			//pBoneArray_[i].diffPose = XMMatrixInverse(nullptr, pBoneArray_[i].bindPose);
+			//pBoneArray_[i].diffPose = pBoneArray_[i].diffPose * pBoneArray_[i].newPose;
+		}
+
+		// 各ボーンに対応した頂点の変形制御
+		for (DWORD i = 0; i < vertexCount_; i++)
+		{
+			// 各頂点ごとに、「影響するボーン×ウェイト値」を反映させた関節行列を作成する
+			XMMATRIX  matrix;
+			ZeroMemory(&matrix, sizeof(matrix));
+			for (int m = 0; m < numBone_; m++)
+			{
+				if (pWeightArray_[i].pBoneIndex[m] < 0)
+				{
+					break;
+				}
+				matrix += pBoneArray_[pWeightArray_[i].pBoneIndex[m]].diffPose * pWeightArray_[i].pBoneWeight[m];
+			}
+
+			// 作成された関節行列を使って、頂点を変形する
+			XMVECTOR Pos = XMLoadFloat3(&pWeightArray_[i].posOrigin);
+			XMVECTOR Normal = XMLoadFloat3(&pWeightArray_[i].normalOrigin);
+
+			XMStoreFloat3(&pVertexData_[i].position, XMVector3TransformCoord(Pos, matrix));
+			XMFLOAT3X3 mat33;
+			XMStoreFloat3x3(&mat33, matrix);
+			XMMATRIX matrix33 = XMLoadFloat3x3(&mat33);
+			XMStoreFloat3(&pVertexData_[i].normal, XMVector3TransformCoord(Normal, matrix33));
+		}
+		//////////////////////////
+	}
 
 }
 
@@ -707,9 +770,9 @@ bool FbxParts::GetBonePositionAtNow(std::string boneName, XMFLOAT3* position)
 		{
 			XMFLOAT4X4  m;
 			XMStoreFloat4x4(&m, it->second->newPose);
-			position->x = m._41;
-			position->y = m._42;
-			position->z = m._43;
+			position->x = (float)m._41;
+			position->y = (float)m._42;
+			position->z = (float)m._43;
 
 			return true;
 		}
