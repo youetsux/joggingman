@@ -46,7 +46,7 @@ HRESULT Fbx::Load(std::string fileName)
 	//geometryConverter.RemoveBadPolygonsFromMeshes(pFbxScene_);
 
 #pragma region SplitMesh
-	geometryConverter.SplitMeshesPerMaterial(pFbxScene_, true);
+	//geometryConverter.SplitMeshesPerMaterial(pFbxScene_, true);
 
 	//meshCount = pFbxScene_->GetSrcObjectCount<FbxMesh>();
 	//matCount = pFbxScene_->GetSrcObjectCount<FbxSurfacePhong>();

@@ -133,6 +133,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CarController.cpp" />
+    <ClCompile Include="CarTest.cpp" />
     <ClCompile Include="DummyController.cpp" />
     <ClCompile Include="Engine\Audio.cpp" />
     <ClCompile Include="Engine\BillBoard.cpp" />
@@ -163,6 +165,8 @@
     <ClCompile Include="TPCam.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CarController.h" />
+    <ClInclude Include="CarTest.h" />
     <ClInclude Include="DummyController.h" />
     <ClInclude Include="Engine\Audio.h" />
     <ClInclude Include="Engine\BillBoard.h" />

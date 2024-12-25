@@ -100,6 +100,8 @@
     <ClCompile Include="DummyController.cpp" />
     <ClCompile Include="TPCam.cpp" />
     <ClCompile Include="Ground.cpp" />
+    <ClCompile Include="CarTest.cpp" />
+    <ClCompile Include="CarController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BoxCollider.h">
@@ -176,6 +178,8 @@
     <ClInclude Include="DummyController.h" />
     <ClInclude Include="TPCam.h" />
     <ClInclude Include="Ground.h" />
+    <ClInclude Include="CarTest.h" />
+    <ClInclude Include="CarController.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shader\Simple2D.hlsl">
