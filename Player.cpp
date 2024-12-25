@@ -50,7 +50,7 @@ void Player::Update()
 		if (pState == IDLE)
 		{
 			pState = JOGGING;
-			Model::SetAnimFrame(hJogging, 1, 42, 1.0);
+			Model::SetAnimFrame(hJogging, 0, 42, 1.0);
 		}
 	}
 	if (Input::IsKeyUp(DIK_SPACE))
@@ -109,7 +109,6 @@ void Player::Update()
 			dt = 0;
 		}
 	}
-
 }
 
 void Player::Draw()
@@ -141,6 +140,7 @@ void Player::Draw()
 		Model::SetTransform(hJump, transform_);
 		Model::Draw(hJump);
 	}
+
 }
 
 
